@@ -1,0 +1,71 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	new file:   .DS_Store
+#	new file:   build.xml
+#	new file:   build/built-jar.properties
+#	new file:   build/classes/info5100/university/example/CourseCatalog/Course.class
+#	new file:   build/classes/info5100/university/example/CourseCatalog/CourseCatalog.class
+#	new file:   build/classes/info5100/university/example/CourseSchedule/CourseLoad.class
+#	new file:   build/classes/info5100/university/example/CourseSchedule/CourseOffer.class
+#	new file:   build/classes/info5100/university/example/CourseSchedule/CourseSchedule.class
+#	new file:   build/classes/info5100/university/example/CourseSchedule/Seat.class
+#	new file:   build/classes/info5100/university/example/CourseSchedule/SeatAssignment.class
+#	new file:   build/classes/info5100/university/example/Department/Calendar.class
+#	new file:   build/classes/info5100/university/example/Department/Department.class
+#	new file:   build/classes/info5100/university/example/Employer/EmployerDirectory.class
+#	new file:   build/classes/info5100/university/example/Employer/EmployerProfile.class
+#	new file:   build/classes/info5100/university/example/Info5001UniversityExample.class
+#	new file:   build/classes/info5100/university/example/Persona/EmploymentHistory/Employment.class
+#	new file:   build/classes/info5100/university/example/Persona/EmploymentHistory/EmploymentHistroy.class
+#	new file:   build/classes/info5100/university/example/Persona/Faculty/FacultyAssignment.class
+#	new file:   build/classes/info5100/university/example/Persona/Faculty/FacultyDirectory.class
+#	new file:   build/classes/info5100/university/example/Persona/Faculty/FacultyProfile.class
+#	new file:   build/classes/info5100/university/example/Persona/Person.class
+#	new file:   build/classes/info5100/university/example/Persona/PersonDirectory.class
+#	new file:   build/classes/info5100/university/example/Persona/StudentAccount.class
+#	new file:   build/classes/info5100/university/example/Persona/StudentDirectory.class
+#	new file:   build/classes/info5100/university/example/Persona/StudentProfile.class
+#	new file:   build/classes/info5100/university/example/Persona/Transcript.class
+#	new file:   lib/CopyLibs/org-netbeans-modules-java-j2seproject-copylibstask.jar
+#	new file:   lib/nblibraries.properties
+#	new file:   manifest.mf
+#	new file:   nbproject/build-impl.xml
+#	new file:   nbproject/genfiles.properties
+#	new file:   nbproject/private/config.properties
+#	new file:   nbproject/private/private.properties
+#	new file:   nbproject/private/private.xml
+#	new file:   nbproject/project.properties
+#	new file:   nbproject/project.xml
+#	new file:   src/.DS_Store
+#	new file:   src/info5100/.DS_Store
+#	new file:   src/info5100/university/.DS_Store
+#	new file:   src/info5100/university/example/.DS_Store
+#	new file:   src/info5100/university/example/CourseCatalog/Course.java
+#	new file:   src/info5100/university/example/CourseCatalog/CourseCatalog.java
+#	new file:   src/info5100/university/example/CourseSchedule/CourseLoad.java
+#	new file:   src/info5100/university/example/CourseSchedule/CourseOffer.java
+#	new file:   src/info5100/university/example/CourseSchedule/CourseSchedule.java
+#	new file:   src/info5100/university/example/CourseSchedule/Seat.java
+#	new file:   src/info5100/university/example/CourseSchedule/SeatAssignment.java
+#	new file:   src/info5100/university/example/Department/Calendar.java
+#	new file:   src/info5100/university/example/Department/Department.java
+#	new file:   src/info5100/university/example/Employer/EmployerDirectory.java
+#	new file:   src/info5100/university/example/Employer/EmployerProfile.java
+#	new file:   src/info5100/university/example/Info5001UniversityExample.java
+#	new file:   src/info5100/university/example/Persona/EmploymentHistory/Employment.java
+#	new file:   src/info5100/university/example/Persona/EmploymentHistory/EmploymentHistroy.java
+#	new file:   src/info5100/university/example/Persona/Faculty/FacultyAssignment.java
+#	new file:   src/info5100/university/example/Persona/Faculty/FacultyDirectory.java
+#	new file:   src/info5100/university/example/Persona/Faculty/FacultyProfile.java
+#	new file:   src/info5100/university/example/Persona/Person.java
+#	new file:   src/info5100/university/example/Persona/PersonDirectory.java
+#	new file:   src/info5100/university/example/Persona/StudentAccount.java
+#	new file:   src/info5100/university/example/Persona/StudentDirectory.java
+#	new file:   src/info5100/university/example/Persona/StudentProfile.java
+#	new file:   src/info5100/university/example/Persona/Transcript.java#
