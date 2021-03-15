@@ -53,4 +53,6 @@ public class StudentProfile {
         ArrayList<String> allCourses = transcript.getAllCourses();
         return allCourses;
     } 
+    
+    public void getStudentEmploymentHistory(){}
 }
