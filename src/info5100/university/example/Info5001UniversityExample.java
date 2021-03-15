@@ -108,7 +108,7 @@ public class Info5001UniversityExample {
         }
 
         int total = department.calculateRevenuesBySemester("Fall2020");
-        System.out.print("Total: " + total);
+        // System.out.print("Total: " + total);
 
     }
 
