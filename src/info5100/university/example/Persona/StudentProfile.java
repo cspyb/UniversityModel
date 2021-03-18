@@ -61,4 +61,8 @@ public class StudentProfile {
     public String getGrade(){
         return transcript.getGrade();
     }
+
+    public EmploymentHistroy getEmploymenthistory() {
+        return employmenthistory;
+    }
 }

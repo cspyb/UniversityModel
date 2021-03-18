@@ -42,7 +42,10 @@ public class Department {
     public PersonDirectory getPersonDirectory() {
 
         return persondirectory;
+    }
 
+    public String getName() {
+        return name;
     }
 
     public StudentDirectory getStudentDirectory() {
