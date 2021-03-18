@@ -11,6 +11,7 @@ import info5100.university.example.CourseSchedule.CourseLoad;
 import info5100.university.example.CourseSchedule.CourseOffer;
 import info5100.university.example.CourseSchedule.CourseSchedule;
 import info5100.university.example.Persona.Faculty.FacultyDirectory;
+import info5100.university.example.Persona.Faculty.FacultyProfile;
 import info5100.university.example.Persona.PersonDirectory;
 import info5100.university.example.Persona.StudentDirectory;
 import info5100.university.example.Persona.StudentProfile;
@@ -29,6 +30,13 @@ public class Department {
     FacultyDirectory facultydirectory;
     //EmployerDirectory employerdirectory;
 
+    public FacultyDirectory getFacultydirectory() {
+        return facultydirectory;
+    }
+
+    public void addFucultyToDirectory(FacultyProfile fp){
+        facultydirectory.addTeacherToList(fp);
+    }
     HashMap<String, CourseSchedule> mastercoursecatalog;
 
     public Department(String n) {
@@ -37,6 +45,7 @@ public class Department {
         coursecatalog = new CourseCatalog(this);
         studentdirectory = new StudentDirectory(this); //pass the department object so it stays linked to it
         persondirectory = new PersonDirectory();
+        facultydirectory = new FacultyDirectory(this);
     }
 
     public PersonDirectory getPersonDirectory() {

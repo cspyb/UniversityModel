@@ -10,6 +10,8 @@ import info5100.university.example.CourseSchedule.CourseLoad;
 import info5100.university.example.CourseSchedule.CourseOffer;
 import info5100.university.example.CourseSchedule.CourseSchedule;
 import info5100.university.example.Department.Department;
+import info5100.university.example.Persona.Faculty.FacultyAssignment;
+import info5100.university.example.Persona.Faculty.FacultyProfile;
 import info5100.university.example.Persona.Person;
 import info5100.university.example.Persona.PersonDirectory;
 import info5100.university.example.Persona.StudentDirectory;
@@ -45,6 +47,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        btn_courses = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,6 +73,13 @@ public class StudentDashboard extends javax.swing.JFrame {
             }
         });
 
+        btn_courses.setText("Courses");
+        btn_courses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_coursesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -80,6 +90,10 @@ public class StudentDashboard extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(btn_courses)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +104,9 @@ public class StudentDashboard extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(btn_courses)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel4);
@@ -172,6 +188,22 @@ public class StudentDashboard extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(sed);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void btn_coursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_coursesActionPerformed
+        // TODO add your handling code here:
+        Department department1 = new Department("Information Systems");
+        Course course = department1.newCourse("app eng", "info 5100", 4);
+        Course course1 = department1.newCourse("app dev", "info 5200", 4);
+        CourseSchedule courseschedule = department1.newCourseSchedule("Fall2020");
+        CourseOffer courseoffer = courseschedule.newCourseOffer("info 5100");
+        Person p = new Person("Professor");
+        FacultyProfile fp = new FacultyProfile(p);
+        FacultyAssignment AssignAsTeacher = fp.AssignAsTeacher(courseoffer);
+        department1.addFucultyToDirectory(fp);
+        StudentsCourses sc = new StudentsCourses(department1,courseschedule);
+
+        jSplitPane1.setRightComponent(sc);
+    }//GEN-LAST:event_btn_coursesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -213,6 +245,7 @@ public class StudentDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_courses;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
