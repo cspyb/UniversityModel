@@ -18,6 +18,8 @@ public class Course {
         name = n;
         number = numb;
         credits = ch;
+        
+        
     }
 
     public String getName() {

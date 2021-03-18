@@ -9,7 +9,6 @@ import info5100.university.example.CourseCatalog.Course;
 import info5100.university.example.CourseSchedule.CourseOffer;
 import info5100.university.example.Department.Department;
 import info5100.university.example.Persona.EmploymentHistory.Employment;
-import info5100.university.example.Persona.EmploymentHistory.EmploymentHistroy;
 import info5100.university.example.Persona.StudentProfile;
 import info5100.university.example.University;
 import java.awt.Color;
@@ -22,7 +21,6 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
@@ -45,7 +43,6 @@ public class StudentEmployment extends javax.swing.JPanel{
     String JobProfile;
     String[] selectedCourses;
     Object departmentName;
-    List<String> selectedCoursesList = new ArrayList<>();
     int j = 1;
     
     ImageIcon northeasternLogo = new ImageIcon("husky.png");
@@ -198,47 +195,18 @@ public class StudentEmployment extends javax.swing.JPanel{
         // TODO add your handling code here:
         List<Employment> employmentList = sp.getEmploymenthistory().getEmployments();
         boolean empExist = false;
-        Department d = new Department(departmentName.toString());
-        System.out.println("rules>>>"+selectedCoursesList.size());
+        //Department d = new Department(departmentName.toString());
+        System.out.println("rowdy baby>>>"+selectedCourses.length);
         
         for(int i = 0; i < employmentList.size(); i++){
             Employment e = employmentList.get(i);
             if(e.getEmployer().getName().equals(jTextField1.getText()) && 
                     e.getJob().equals(JobProfile)){
-                    List<Course> courseOfferedList = new ArrayList<>();
-                    for(int l = 0; l < selectedCoursesList.size(); l++){
-                        for(int m=0; m < d.getCourseCatalog().getCourseList().size(); m++){
-                            if(selectedCoursesList.get(l).equals(d.getCourseCatalog().getCourseList().get(m).getName())){
-                                courseOfferedList.add(d.getCourseCatalog().getCourseList().get(m));
-                            }
-                        }
-                    }
-                    
-                    e.getRelevantcourseoffers().addAll(courseOfferedList);
-                empExist = true;  
-            }
-        }
-        
-        if(empExist == false){
-            sp.getEmploymenthistory().newEmployment(JobProfile, jTextField1.getText());
-            for(int i = 0; i < employmentList.size(); i++){
-            Employment e = employmentList.get(i);
-            if(e.getEmployer().getName().equals(jTextField1.getText()) && 
-                    e.getJob().equals(JobProfile)){
                     List<Course> courseOfferedList = e.getRelevantcourseoffers();
-                    for(int l = 0; l < selectedCoursesList.size(); l++){
-                        for(int m=0; m < d.getCourseCatalog().getCourseList().size(); m++){
-                            if(selectedCoursesList.get(l).equals(d.getCourseCatalog().getCourseList().get(m).getName())){
-                                courseOfferedList.add(d.getCourseCatalog().getCourseList().get(m));
-                            }
-                        }
-                    }
-                    e.getRelevantcourseoffers().addAll(courseOfferedList);
+                    //for(int k = 0; k <)
+                    
             }
         }
-        }
-        
-        
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
 
@@ -337,7 +305,6 @@ public class StudentEmployment extends javax.swing.JPanel{
                 System.out.println(">>>>> addItem");
                 listOfselectedCourses.insertItemAt(CourseFromListOfCourses.toString(), j);
                 j++;
-                selectedCoursesList.add(CourseFromListOfCourses.toString());
                 listOfCourses.removeItem(CourseFromListOfCourses);
                 //selectedCourses[j] = CourseFromListOfCourses;
             }
@@ -356,7 +323,6 @@ public class StudentEmployment extends javax.swing.JPanel{
                 j++;
                 //listOfCourses.removeItem(CourseFromListOfCourses);
                 listOfselectedCourses.removeItem(CourseFromListOfSelectedCourses);
-                selectedCoursesList.remove(CourseFromListOfSelectedCourses);
             }
         });
         

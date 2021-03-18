@@ -5,40 +5,71 @@
  */
 package ui;
 
+import info5100.university.example.CourseCatalog.Course;
+import info5100.university.example.CourseCatalog.CourseCatalog;
+import info5100.university.example.CourseSchedule.CourseOffer;
+import info5100.university.example.CourseSchedule.CourseSchedule;
+import info5100.university.example.Department.Department;
+import info5100.university.example.Persona.Faculty.FacultyDirectory;
+import info5100.university.example.Persona.Faculty.FacultyProfile;
 import java.awt.Color;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author mrudu
+ * @author snehalchavan
  */
-public class StudentEmploymentHistory extends javax.swing.JPanel {
+public class StudentsCourses extends javax.swing.JPanel {
 
     /**
-     * Creates new form StudentEmploymentHistory
-     * 
+     * Creates new form StudentsCourses
      */
     
-    ImageIcon northeasternLogo = new ImageIcon("husky.png");
     DefaultTableModel model;
+//    Department department;
     
-    public StudentEmploymentHistory() {
+    ImageIcon northeasternLogo = new ImageIcon("husky.png");
+    
+    public StudentsCourses(Department department,CourseSchedule courseSchedule) {
         initComponents();
         jLabel6.setIcon(northeasternLogo);
         Border blackline = BorderFactory.createLineBorder(Color.black);
         jPanel1.setBorder(blackline);
-        displayTable();
+
+        ArrayList<Course> courseCatalog = department.getCourseCatalog().getCourseList();
+        FacultyDirectory facultydirectory = department.getFacultydirectory();
+        ArrayList<FacultyProfile> teacherlist = facultydirectory.getTeacherlist();
+        ArrayList<String> name = new ArrayList() ;
         model = new DefaultTableModel();
-        jTable1.setModel(model);
-        model.addColumn("EMPLOYER");
-        model.addColumn("JOB PROFILE");
+        table_Courses.setModel(model);
+        model.addColumn("Course");
+        model.addColumn("Lecturer");
+        ArrayList<CourseOffer> schedule = courseSchedule.getSchedule();
+         for(int i=0;i<courseCatalog.size();i++){
+             try{
+            if(teacherlist.get(i).getCourseOffer(teacherlist.get(i)).equals(courseCatalog.get(i).getName())){
+                name.add(teacherlist.get(i).getFacultyName());
+            }
+             }catch(IndexOutOfBoundsException io){
+                    name.add(null);
+             }
+         }
+         
+        for(int i=0;i<courseCatalog.size();i++){
+             model.addRow(new Object[]{
+                courseCatalog.get(i).getName(),
+                 name.get(i)
+            });
+        }
+        
+
        
-    }
+            }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,9 +83,8 @@ public class StudentEmploymentHistory extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table_Courses = new javax.swing.JTable();
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -72,11 +102,11 @@ public class StudentEmploymentHistory extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(532, Short.MAX_VALUE))
+                .addContainerGap(597, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(20, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(29, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
@@ -85,15 +115,11 @@ public class StudentEmploymentHistory extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("My Employment History");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_Courses.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -104,55 +130,34 @@ public class StudentEmploymentHistory extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table_Courses);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(184, 184, 184))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 385, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(160, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable table_Courses;
     // End of variables declaration//GEN-END:variables
-
-    private void displayTable() {
-    /*Object data[][]={ {"101","Amit"},    
-                          {"102","Jai"},    
-                          {"101","Sachin"}};    
-    String column[]={"EMPLOYER NAME","JOB PROFILE"};         
-    JTable jt=new JTable(data,column);    
-    jt.setBounds(200,200,700,300);          
-    JScrollPane sp=new JScrollPane(jt);    
-    add(sp); 
-    sp.setBounds(200,200,700,300);
-    sp.setVisible(true);*/    
-    }
 }
