@@ -3,17 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Persona/Transcript.java</file>
-            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/ui/StudentDashboard.java</file>
-            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/CourseSchedule/SeatAssignment.java</file>
-            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Persona/StudentProfile.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Employer/EmployerDirectory.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/ui/StudentEmployment.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Persona/PersonDirectory.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/CourseCatalog/Course.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Persona/Person.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Employer/EmployerProfile.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/CourseCatalog/CourseCatalog.java</file>
             <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/CourseSchedule/Seat.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Info5001UniversityExample.java</file>
             <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/CourseSchedule/CourseOffer.java</file>
             <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Persona/EmploymentHistory/Employment.java</file>
-            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/ui/StudentEmployment.java</file>
-            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Info5001UniversityExample.java</file>
-            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Persona/EmploymentHistory/EmploymentHistroy.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Department/Department.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Persona/StudentDirectory.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/CourseSchedule/CourseSchedule.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Persona/StudentProfile.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Persona/Transcript.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/CourseSchedule/SeatAssignment.java</file>
             <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/CourseSchedule/CourseLoad.java</file>
+            <file>file:/C:/Users/mrudu/Desktop/UniversityModel/src/info5100/university/example/Persona/EmploymentHistory/EmploymentHistroy.java</file>
         </group>
     </open-files>
 </project-private>
