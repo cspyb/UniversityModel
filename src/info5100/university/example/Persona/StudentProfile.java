@@ -53,4 +53,12 @@ public class StudentProfile {
         ArrayList<String> allCourses = transcript.getAllCourses();
         return allCourses;
     } 
+    
+    public void getGPA(){
+        System.out.println("Student gpa: " + transcript.CalculateGPA());
+    }
+    
+    public String getGrade(){
+        return transcript.getGrade();
+    }
 }

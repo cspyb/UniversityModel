@@ -7,6 +7,7 @@ package info5100.university.example.Persona.Faculty;
 
 import info5100.university.example.Persona.*;
 import info5100.university.example.CourseSchedule.CourseOffer;
+import info5100.university.example.CourseSchedule.Seat;
 import java.util.ArrayList;
 
 /**
@@ -32,7 +33,11 @@ public class FacultyProfile {
         return fa;
     }
     
-    public FacultyProfile getCourseOffer(String courseid){
+    public String getCourseOffer(FacultyProfile fp){
+        for(FacultyAssignment fa : facultyassignments){
+            if(fp == fa.getFacultyProfile())
+                return fa.courseoffer.getCourseName();
+        }
         return null; //complete it later
     }
 

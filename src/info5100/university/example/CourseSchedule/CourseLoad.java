@@ -17,7 +17,12 @@ import java.util.Iterator;
 public class CourseLoad {
     String semester;
     ArrayList<SeatAssignment> seatassignments;
-    
+    String grade;
+
+    public String getGrade() {
+        return grade;
+    }
+
     public CourseLoad(String s){
         seatassignments = new ArrayList<SeatAssignment>();
         semester = s;
@@ -45,8 +50,46 @@ public class CourseLoad {
                            courses.add(sa.seat.getCourseName());
                 }
         }
-            System.out.println("info5100.university.example.CourseSchedule.CourseLoad.getListOfCoursesCompleted()");
         return courses;
     } 
+
+    
+    public double calculateGPA(HashMap<String, CourseLoad> courseloadlist) {
+        double sumCredits = 0;
+        double sumGradePoints = 0.0;
+        double gpa = 0.0;
+        for(CourseLoad cl : courseloadlist.values()){
+            for(SeatAssignment sa : cl.seatassignments){
+                sumCredits = sumCredits + sa.seat.getCourseCredit();
+                sumGradePoints = sumGradePoints + sa.getGradePoints() * sa.seat.getCourseCredit();
+            }
+        }
+        
+        gpa = sumGradePoints / sumCredits;
+        setGrade(gpa);
+        return gpa;
+    }
+
+    public void setGrade(double calculateGPA) {
+        if(calculateGPA == 4){
+            this.grade = "A";
+        }else if(calculateGPA >= 3.67 && calculateGPA < 4){
+            this.grade = "A-";
+        }else if(calculateGPA >= 3.33 && calculateGPA < 3.67){
+            this.grade = "B+";
+        }else if(calculateGPA >= 3.00 && calculateGPA < 3.33){
+            this.grade = "B";
+        }else if(calculateGPA >= 2.67 && calculateGPA < 3.00){
+            this.grade = "B-";
+        }else if(calculateGPA >= 2.33 && calculateGPA < 2.67){
+            this.grade = "C+";
+        }else if(calculateGPA >= 2.00 && calculateGPA < 2.33){
+            this.grade = "C";
+        }else if(calculateGPA >= 1.67 && calculateGPA < 2.00){
+            this.grade = "C-";
+        }else{
+            this.grade = "F";
+        }
+    }
     
 }

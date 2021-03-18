@@ -8,8 +8,6 @@ package info5100.university.example.Persona;
 import info5100.university.example.CourseSchedule.CourseLoad;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 /**
  *
@@ -50,4 +48,12 @@ public class Transcript {
             ArrayList<String> listOfCoursesCompleted = currentcourseload.getListOfCoursesCompleted(courseloadlist);
             return listOfCoursesCompleted;
         }
+
+    public double CalculateGPA() {
+        return currentcourseload.calculateGPA(courseloadlist);
+    }
+    
+    public String getGrade(){
+        return currentcourseload.getGrade();
+    }
 }

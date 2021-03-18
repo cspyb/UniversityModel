@@ -10,6 +10,8 @@ import info5100.university.example.CourseSchedule.CourseLoad;
 import info5100.university.example.CourseSchedule.CourseOffer;
 import info5100.university.example.CourseSchedule.CourseSchedule;
 import info5100.university.example.Department.Department;
+import info5100.university.example.Persona.Faculty.FacultyAssignment;
+import info5100.university.example.Persona.Faculty.FacultyProfile;
 import info5100.university.example.Persona.Person;
 import info5100.university.example.Persona.PersonDirectory;
 import info5100.university.example.Persona.StudentDirectory;
@@ -54,7 +56,7 @@ public class Info5001UniversityExample {
 ////        courseload.getListOfCoursesCompleted();
 
         Department department = new Department("Information Systems");
-
+        
  
 
         Course course3 = department.newCourse("app eng", "info 5100", 4);         
@@ -67,11 +69,13 @@ public class Info5001UniversityExample {
         CourseOffer courseoffer = courseschedule.newCourseOffer("info 5100");       
         CourseOffer courseoffer1 = courseschedule.newCourseOffer("info 5200");
         CourseOffer courseoffer2 = courseschedule1.newCourseOffer("info 5555");
-        
-        courseoffer.generatSeats(10);        
+        if(courseoffer != null){
+        courseoffer.generatSeats(10);   }     
         courseoffer1.generatSeats(10);
         courseoffer2.generatSeats(10);
- 
+        Person p = new Person("F101");
+        FacultyProfile fp = new FacultyProfile(p);
+//        FacultyAssignment fa = new FacultyAssignment(fp, courseoffer);
 
         
         PersonDirectory pd = department.getPersonDirectory();
@@ -82,8 +86,9 @@ public class Info5001UniversityExample {
         courseload.newSeatAssignment(courseoffer); //register student in class
         CourseLoad courseload11 = student.newCourseLoad("Spring21");
         courseload11.newSeatAssignment(courseoffer2);
+        FacultyAssignment AssignAsTeacher = fp.AssignAsTeacher(courseoffer1);
+        AssignAsTeacher.assignGradePointsToStudent("info 5200", fp);
         
-
         // person 2
         
         PersonDirectory pd1 = department.getPersonDirectory();
@@ -101,14 +106,16 @@ public class Info5001UniversityExample {
         CourseLoad courseload2 = student2.newCourseLoad("Fall2020"); 
         courseload2.newSeatAssignment(courseoffer1);
 
-        StudentProfile findStudent = sd.findStudent("0112304");
+        StudentProfile findStudent = sd.findStudent("0112303");
         ArrayList<String> courseStudent = findStudent.getTranscript();
+        findStudent.getGPA();
         for(int i=0;i<courseStudent.size();i++){
             System.out.println("name "+courseStudent.get(i));
         }
 
         int total = department.calculateRevenuesBySemester("Fall2020");
         System.out.print("Total: " + total);
+        System.out.println("Grade"+findStudent.getGrade());
 
     }
 

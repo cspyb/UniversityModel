@@ -85,5 +85,13 @@ public class CourseOffer {
     public String getCourseName(){
         return course.getName();
     }
+    
+    public int getCredits(){
+        return course.getCourseCredits();
+    }
+    
+    public ArrayList<Seat> getSeatList(){
+        return seatlist;
+    }
 
 }

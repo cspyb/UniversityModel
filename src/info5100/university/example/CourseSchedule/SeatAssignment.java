@@ -13,6 +13,7 @@ public class SeatAssignment {
     
     Seat seat;
     CourseLoad courseload;
+    
     public SeatAssignment(Seat s){
         seat = s;
 //        courseload = cl;
@@ -28,4 +29,11 @@ public class SeatAssignment {
         return seat.getCourseName();
     }
     
+    public int getCourseCredit(){
+        return seat.getCourseCredit();
+    }
+    
+    public double getGradePoints(){
+        return seat.getGradePoint();
+    }
 }

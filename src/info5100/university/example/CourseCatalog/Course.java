@@ -33,4 +33,8 @@ public class Course {
         return price*credits;
         
     }
+    
+    public int getCourseCredits(){
+        return credits;
+    }
 }

@@ -6,6 +6,8 @@
 package info5100.university.example.Persona.Faculty;
 
 import info5100.university.example.CourseSchedule.CourseOffer;
+import info5100.university.example.CourseSchedule.Seat;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,4 +25,24 @@ public class FacultyAssignment {
         return facultyprofile;
     }
     
+    public ArrayList<Seat> getSeatList(FacultyProfile fp){
+        return courseoffer.getSeatList();
+    }    
+
+    public void assignGradePointsToStudent(String name, FacultyProfile fp) {
+        ArrayList<FacultyAssignment> facultyassignments = fp.facultyassignments;
+        System.out.println("Fassignment:"+facultyassignments.size());
+        String coursename;
+        ArrayList<Seat> seatList = null;
+        for(FacultyAssignment fa : facultyassignments){
+            if(fa.facultyprofile == fp){
+                coursename = fp.getCourseOffer(fp);
+                seatList = fa.courseoffer.getSeatList();
+            }
+        }
+        System.out.println("seatloist"+seatList.size());
+        for(Seat s : seatList){
+            s.setGradePoint(3.2);
+        }
+    }
 }

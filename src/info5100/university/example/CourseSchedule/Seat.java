@@ -13,6 +13,7 @@ public class Seat {
     
     Boolean occupied; 
     int number;
+    double gradePoint;
     SeatAssignment seatassignment;
     CourseOffer courseoffer;
     public Seat (CourseOffer co, int n){
@@ -20,6 +21,13 @@ public class Seat {
         number = n;
         occupied = false;
         
+    }
+     public double getGradePoint() {
+        return gradePoint;
+    }
+
+    public void setGradePoint(double gradePoint) {
+        this.gradePoint = gradePoint;
     }
     
     public Boolean isOccupied(){
@@ -36,6 +44,10 @@ public class Seat {
     
     public String getCourseName(){
         return courseoffer.getCourseName();
+    }
+    
+    public int getCourseCredit(){
+        return courseoffer.getCredits();
     }
     
 }
