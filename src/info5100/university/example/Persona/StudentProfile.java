@@ -52,7 +52,9 @@ public class StudentProfile {
     public ArrayList<String> getTranscript(){
         ArrayList<String> allCourses = transcript.getAllCourses();
         return allCourses;
-    } 
-    
-    public void getStudentEmploymentHistory(){}
+    }
+
+    public EmploymentHistroy getEmploymenthistory() {
+        return employmenthistory;
+    }
 }

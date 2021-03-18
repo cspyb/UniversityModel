@@ -43,5 +43,8 @@ public class EmployerDirectory {
         }
             return null; //not found after going through the whole list
          }
-    
+
+    public ArrayList<EmployerProfile> getEmployerlist() {
+        return employerlist;
+    }
 }

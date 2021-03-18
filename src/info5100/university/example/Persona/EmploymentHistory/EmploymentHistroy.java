@@ -17,10 +17,16 @@ public class EmploymentHistroy {
         employments = new ArrayList();
     }
     
-    public Employment newEmployment(String job){
-        Employment ne = new Employment(job);
+    public Employment newEmployment(String job, String employerName){
+        Employment ne = new Employment(job, employerName);
         employments.add(ne);
         return ne;
     }
+
+    public ArrayList<Employment> getEmployments() {
+        return employments;
+    }
+    
+    
     
 }
