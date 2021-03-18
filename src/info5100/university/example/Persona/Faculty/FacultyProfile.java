@@ -18,7 +18,6 @@ public class FacultyProfile {
 
     Person person;
     ArrayList <FacultyAssignment> facultyassignments; 
-    FacultyDirectory facultyDirectory;
 
     public FacultyProfile(Person p) {
 
@@ -38,7 +37,6 @@ public class FacultyProfile {
         for(FacultyAssignment fa : facultyassignments){
             if(fp == fa.getFacultyProfile())
                 return fa.courseoffer.getCourseName();
-            
         }
         return null; //complete it later
     }
@@ -48,10 +46,6 @@ public class FacultyProfile {
             return true;
         }
         return false;
-    }
-    
-    public String getFacultyName(){
-        return this.person.getPersonId();
     }
 
     

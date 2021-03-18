@@ -18,10 +18,6 @@ public class FacultyDirectory {
     Department department;
     ArrayList<FacultyProfile> teacherlist;
 
-    public ArrayList<FacultyProfile> getTeacherlist() {
-        return teacherlist;
-    }
-
     public FacultyDirectory(Department d) {
 
         department = d;
@@ -47,8 +43,4 @@ public class FacultyDirectory {
             return null; //not found after going through the whole list
          }
     
-    public void addTeacherToList(FacultyProfile fp){
-        teacherlist.add(fp);
-    }
-    
-    }
+}

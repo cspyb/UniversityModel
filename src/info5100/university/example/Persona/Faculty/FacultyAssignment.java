@@ -31,6 +31,7 @@ public class FacultyAssignment {
 
     public void assignGradePointsToStudent(String name, FacultyProfile fp) {
         ArrayList<FacultyAssignment> facultyassignments = fp.facultyassignments;
+        System.out.println("Fassignment:"+facultyassignments.size());
         String coursename;
         ArrayList<Seat> seatList = null;
         for(FacultyAssignment fa : facultyassignments){
@@ -39,6 +40,7 @@ public class FacultyAssignment {
                 seatList = fa.courseoffer.getSeatList();
             }
         }
+        System.out.println("seatloist"+seatList.size());
         for(Seat s : seatList){
             s.setGradePoint(3.2);
         }
