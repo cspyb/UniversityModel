@@ -7,16 +7,21 @@ package ui;
 
 import info5100.university.example.CourseCatalog.Course;
 import info5100.university.example.CourseCatalog.CourseCatalog;
+import info5100.university.example.CourseSchedule.CourseEvaluation;
 import info5100.university.example.CourseSchedule.CourseOffer;
 import info5100.university.example.CourseSchedule.CourseSchedule;
 import info5100.university.example.Department.Department;
 import info5100.university.example.Persona.Faculty.FacultyDirectory;
 import info5100.university.example.Persona.Faculty.FacultyProfile;
+import info5100.university.example.Persona.StudentProfile;
+import info5100.university.example.University;
 import java.awt.Color;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
@@ -35,34 +40,47 @@ public class StudentsCourses extends javax.swing.JPanel {
     
     ImageIcon northeasternLogo = new ImageIcon("husky.png");
     
-    public StudentsCourses(Department department,CourseSchedule courseSchedule) {
+    public StudentsCourses(Department department,CourseSchedule courseSchedule,StudentProfile student) {
         initComponents();
         jLabel6.setIcon(northeasternLogo);
         Border blackline = BorderFactory.createLineBorder(Color.black);
         jPanel1.setBorder(blackline);
-
+        jPanel_FacultyFeedback.setVisible(false);
+        CourseCatalog courseCatalog1 = department.getCourseCatalog();
         ArrayList<Course> courseCatalog = department.getCourseCatalog().getCourseList();
+        ArrayList<String> courses = student.getTranscript();
         FacultyDirectory facultydirectory = department.getFacultydirectory();
         ArrayList<FacultyProfile> teacherlist = facultydirectory.getTeacherlist();
         ArrayList<String> name = new ArrayList() ;
+        
         model = new DefaultTableModel();
         table_Courses.setModel(model);
         model.addColumn("Course");
         model.addColumn("Lecturer");
+        
         ArrayList<CourseOffer> schedule = courseSchedule.getSchedule();
-         for(int i=0;i<courseCatalog.size();i++){
-             try{
-            if(teacherlist.get(i).getCourseOffer(teacherlist.get(i)).equals(courseCatalog.get(i).getName())){
-                name.add(teacherlist.get(i).getFacultyName());
-            }
-             }catch(IndexOutOfBoundsException io){
+        
+        for(int i=0;i<courses.size();i++){
+            for(int j=0;j<teacherlist.size();j++){
+                String courseOffer = teacherlist.get(j).getCourseOffer(teacherlist.get(j));
+           
+            try{
+                if(courseOffer.equals(courses.get(i))){
+                    name.add(teacherlist.get(j).getFacultyName());
+                    
+                }
+             }catch(NullPointerException io){
                     name.add(null);
+             }catch(IndexOutOfBoundsException is){
+                 name.add(null);
              }
-         }
-         
-        for(int i=0;i<courseCatalog.size();i++){
+
+            }
+        }
+        
+        for(int i=0;i<courses.size();i++){
              model.addRow(new Object[]{
-                courseCatalog.get(i).getName(),
+                courses.get(i),
                  name.get(i)
             });
         }
@@ -85,6 +103,14 @@ public class StudentsCourses extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_Courses = new javax.swing.JTable();
+        jPanel_FacultyFeedback = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox_feedVal = new javax.swing.JComboBox<>();
+        jButton_submitFeedback = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -102,7 +128,7 @@ public class StudentsCourses extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(597, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(29, Short.MAX_VALUE)
@@ -130,33 +156,133 @@ public class StudentsCourses extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table_Courses.setLocation(new java.awt.Point(0, 200));
+        table_Courses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_CoursesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table_Courses);
+
+        jPanel_FacultyFeedback.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Faculty Feedback");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("1. How was the course taught by Professor ?");
+
+        jComboBox_feedVal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jComboBox_feedVal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Very Good", "Good", "Moderate", "Poor" }));
+
+        jButton_submitFeedback.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButton_submitFeedback.setText("Submit");
+        jButton_submitFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_submitFeedbackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_FacultyFeedbackLayout = new javax.swing.GroupLayout(jPanel_FacultyFeedback);
+        jPanel_FacultyFeedback.setLayout(jPanel_FacultyFeedbackLayout);
+        jPanel_FacultyFeedbackLayout.setHorizontalGroup(
+            jPanel_FacultyFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_FacultyFeedbackLayout.createSequentialGroup()
+                .addGroup(jPanel_FacultyFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_FacultyFeedbackLayout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel_FacultyFeedbackLayout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addGroup(jPanel_FacultyFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton_submitFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox_feedVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_FacultyFeedbackLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(82, 82, 82))
+        );
+        jPanel_FacultyFeedbackLayout.setVerticalGroup(
+            jPanel_FacultyFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_FacultyFeedbackLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox_feedVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_submitFeedback)
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setText("Courses");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(184, 184, 184))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel_FacultyFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(329, 329, 329)
+                        .addComponent(jLabel3)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel_FacultyFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton_submitFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_submitFeedbackActionPerformed
+        // TODO add your handling code here:
+
+        University u = new University();
+        u.setData();
+        Department department1 = u.getDepartmentList().get(0);
+        FacultyDirectory teacherlist = department1.getFacultydirectory();
+        CourseEvaluation eval = new CourseEvaluation();
+
+        Object selectedItem = jComboBox_feedVal.getSelectedIndex();
+        Vector d = model.getDataVector().elementAt(table_Courses.getSelectedRow());
+
+        eval.setFacultyFeedback((String) d.get(1), (int) selectedItem,teacherlist);
+        JOptionPane.showMessageDialog(table_Courses, "Feedback submitted successfully");
+    }//GEN-LAST:event_jButton_submitFeedbackActionPerformed
+
+    private void table_CoursesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_CoursesMouseClicked
+        // TODO add your handling code here:
+        jPanel_FacultyFeedback.setVisible(true);
+    }//GEN-LAST:event_table_CoursesMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_submitFeedback;
+    private javax.swing.JComboBox<String> jComboBox_feedVal;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel_FacultyFeedback;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_Courses;
     // End of variables declaration//GEN-END:variables

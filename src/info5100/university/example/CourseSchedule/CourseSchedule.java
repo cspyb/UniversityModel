@@ -56,6 +56,31 @@ public class CourseSchedule {
         }
         return sum;
     }
+    
+    
+    public int calculateTotalLoss() {
+        int sum = 0;
+        for (CourseOffer co : schedule) {
+            sum = sum + co.getTotalCourseLoss();
+        }
+        return sum;
+    }
+    
+    public String getPopularCourse() {
+        float percentTage = 0;
+        String course = new String("");
+        for (CourseOffer co : schedule) {
+            float a = co.getOccupiedSeats();
+            float b = co.getTotalSeats();
+            float coursePercentTage = (a/b) * 100;
+            System.out.println("occupied " + co.getCourseName() + " seats " + co.getOccupiedSeats());
+            if (coursePercentTage > percentTage) {
+                percentTage = coursePercentTage;
+                course = co.getCourseName();
+            }
+        }
+        return course;
+    }
 
     public ArrayList<CourseOffer> getSchedule() {
         return schedule;

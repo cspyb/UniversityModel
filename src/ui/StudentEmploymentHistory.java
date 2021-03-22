@@ -5,7 +5,11 @@
  */
 package ui;
 
+import info5100.university.example.Persona.EmploymentHistory.Employment;
+import info5100.university.example.Persona.StudentProfile;
+import info5100.university.example.University;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
@@ -24,19 +28,39 @@ public class StudentEmploymentHistory extends javax.swing.JPanel {
      * 
      */
     
+    StudentProfile sp;
+    University uni;
+    
     ImageIcon northeasternLogo = new ImageIcon("husky.png");
     DefaultTableModel model;
     
-    public StudentEmploymentHistory() {
+    public StudentEmploymentHistory(StudentProfile sp, University uni) {
         initComponents();
         jLabel6.setIcon(northeasternLogo);
         Border blackline = BorderFactory.createLineBorder(Color.black);
         jPanel1.setBorder(blackline);
-        displayTable();
+        this.sp = sp;
+        this.uni = uni;
+        
         model = new DefaultTableModel();
         jTable1.setModel(model);
         model.addColumn("EMPLOYER");
         model.addColumn("JOB PROFILE");
+        model.addColumn("JOB TYPE");
+        model.addColumn("START DATE");
+        model.addColumn("END DATE");
+        
+        List<Employment> employmentList = sp.getEmploymenthistory().getEmployments();
+        System.out.println(">>>>>>>>>>>"+employmentList.size());
+        for(int i=0; i < employmentList.size(); i++){
+            model.addRow(new Object[] {
+                employmentList.get(i).getEmployer().getName(), 
+                employmentList.get(i).getJob(),
+                employmentList.get(i).getType(),
+                employmentList.get(i).getStartDate(),
+                employmentList.get(i).getEndDate()
+            });
+        }
        
     }
 
@@ -55,6 +79,8 @@ public class StudentEmploymentHistory extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -110,11 +136,8 @@ public class StudentEmploymentHistory extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

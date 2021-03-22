@@ -25,8 +25,8 @@ public class CourseCatalog {
         return courselist;
     }
     
-    public Course newCourse(String n, String nm, int cr){
-        Course c = new Course(n, nm, cr);
+    public Course newCourse(String n, String nm, int cr,String skill){
+        Course c = new Course(n, nm, cr,skill);
         courselist.add(c);
         return c;
     }
@@ -36,6 +36,15 @@ public class CourseCatalog {
         for( Course c: courselist){
             
             if(c.getCOurseNumber().equals(n)) return c;
+        }
+        return null;
+    }
+    
+    public Course getCourseByName(String name){
+        
+        for( Course c: courselist){
+            
+            if(c.getName().equals(name)) return c;
         }
         return null;
     }

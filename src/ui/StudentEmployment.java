@@ -24,7 +24,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Matcher;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
 /**
@@ -47,6 +49,7 @@ public class StudentEmployment extends javax.swing.JPanel{
     Object departmentName;
     List<String> selectedCoursesList = new ArrayList<>();
     int j = 1;
+    Department d1;
     
     ImageIcon northeasternLogo = new ImageIcon("husky.png");
     
@@ -136,6 +139,9 @@ public class StudentEmployment extends javax.swing.JPanel{
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
+        SubmitButton.setBackground(new java.awt.Color(0, 0, 0));
+        SubmitButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SubmitButton.setForeground(new java.awt.Color(255, 255, 255));
         SubmitButton.setText("Submit");
         SubmitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,10 +158,6 @@ public class StudentEmployment extends javax.swing.JPanel{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(SubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(180, 180, 180))
             .addGroup(layout.createSequentialGroup()
                 .addGap(134, 134, 134)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,6 +169,10 @@ public class StudentEmployment extends javax.swing.JPanel{
                     .addComponent(jLabel3)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(59, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(SubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,9 +190,9 @@ public class StudentEmployment extends javax.swing.JPanel{
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
                 .addComponent(SubmitButton)
-                .addGap(22, 22, 22))
+                .addGap(61, 61, 61))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -196,48 +202,86 @@ public class StudentEmployment extends javax.swing.JPanel{
 
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         // TODO add your handling code here:
+        boolean flag = false;
+        
+        try{
         List<Employment> employmentList = sp.getEmploymenthistory().getEmployments();
         boolean empExist = false;
-        Department d = new Department(departmentName.toString());
-        System.out.println("rules>>>"+selectedCoursesList.size());
         
-        for(int i = 0; i < employmentList.size(); i++){
+        
+        if(jTextField1.getText().isEmpty()){
+            flag = true;
+            JOptionPane.showMessageDialog(null, "Please enter all fields");
+        }
+        
+        if(flag == false){
+        for(int a = 0; a < uni.getDepartmentList().size(); a++){
+            if(uni.getDepartmentList().get(a).getName().equals(departmentName.toString())){
+                d1 = uni.getDepartmentList().get(a);
+            }
+        }
+        
+        for(int i =0; i < employmentList.size(); i++){
             Employment e = employmentList.get(i);
+            System.out.println("for>>>>");
             if(e.getEmployer().getName().equals(jTextField1.getText()) && 
                     e.getJob().equals(JobProfile)){
-                    List<Course> courseOfferedList = new ArrayList<>();
-                    for(int l = 0; l < selectedCoursesList.size(); l++){
-                        for(int m=0; m < d.getCourseCatalog().getCourseList().size(); m++){
-                            if(selectedCoursesList.get(l).equals(d.getCourseCatalog().getCourseList().get(m).getName())){
-                                courseOfferedList.add(d.getCourseCatalog().getCourseList().get(m));
+                    System.out.println("if>>>>");
+                    empExist = true;
+                    List<Course> courseOfferedList = e.getRelevantcourseoffers();
+                    List<Course> catalog = d1.getCourseCatalog().getCourseList();
+                    
+                    for(int j = 0; j < selectedCoursesList.size(); j++){
+                        for(int k =0; k < courseOfferedList.size(); k++){
+                            if(selectedCoursesList.get(j).equals(courseOfferedList.get(k).getName())){
+                                for(int l = 0; l < catalog.size(); l++){
+                                    if(selectedCoursesList.get(j).equals(catalog.get(l).getName())){
+                                        courseOfferedList.add(catalog.get(l));
+                                    }
+                                }
                             }
                         }
                     }
-                    
-                    e.getRelevantcourseoffers().addAll(courseOfferedList);
-                empExist = true;  
+                }   
             }
-        }
         
         if(empExist == false){
-            sp.getEmploymenthistory().newEmployment(JobProfile, jTextField1.getText());
-            for(int i = 0; i < employmentList.size(); i++){
-            Employment e = employmentList.get(i);
-            if(e.getEmployer().getName().equals(jTextField1.getText()) && 
-                    e.getJob().equals(JobProfile)){
-                    List<Course> courseOfferedList = e.getRelevantcourseoffers();
-                    for(int l = 0; l < selectedCoursesList.size(); l++){
-                        for(int m=0; m < d.getCourseCatalog().getCourseList().size(); m++){
-                            if(selectedCoursesList.get(l).equals(d.getCourseCatalog().getCourseList().get(m).getName())){
-                                courseOfferedList.add(d.getCourseCatalog().getCourseList().get(m));
-                            }
-                        }
+            Employment em = sp.getEmploymenthistory().newEmployment(JobProfile, jTextField1.getText());
+            ArrayList<Course> courseOfferedList = em.getRelevantcourseoffers();
+            List<Course> catalog = d1.getCourseCatalog().getCourseList();
+                    
+            for(int j = 0; j < selectedCoursesList.size(); j++){
+                for(int l = 0; l < catalog.size(); l++){
+                    if(selectedCoursesList.get(j).equals(catalog.get(l).getName())){
+                        courseOfferedList.add(catalog.get(l));
                     }
-                    e.getRelevantcourseoffers().addAll(courseOfferedList);
+                }
             }
-        }
+            
+            //System.out.println("job Profile>>>"+ JobProfile);
         }
         
+            for(int m =0; m < employmentList.size(); m++){
+                System.out.println(">>>"+ employmentList.get(m).getEmployer().getName());
+                System.out.println(">>>"+ employmentList.get(m).getJob());
+                System.out.println(">>>"+ d1.getName());
+                for(int n = 0; n < employmentList.get(m).getRelevantcourseoffers().size(); n++){
+                    System.out.println("list>>>"+ employmentList.get(m).getRelevantcourseoffers().get(n).getName());
+                }
+            }
+        
+        jTextField1.setText("");
+        SubmitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                listOfCourses.removeAllItems();
+            }
+        });
+        JOptionPane.showMessageDialog(null, "Your Feedback is submitted");
+        }
+        }catch(NullPointerException n){
+            flag = true;
+            JOptionPane.showMessageDialog(null, "Please enter all fields");
+        }
         
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
@@ -326,7 +370,7 @@ public class StudentEmployment extends javax.swing.JPanel{
             }
         });
         
-        Icon icon = new ImageIcon("src\\images\\icons8_arrow_24px.png");
+        Icon icon = new ImageIcon("icons8_arrow_24px.png");
         JButton button7 = new JButton(icon);
         button7.setBounds(600, 380, 50, 35);
         add(button7);
@@ -343,7 +387,7 @@ public class StudentEmployment extends javax.swing.JPanel{
             }
         });
         
-        Icon icon2 = new ImageIcon("src\\images\\icons8_arrow_pointing_left_26px_1.png");
+        Icon icon2 = new ImageIcon("icons8_arrow_pointing_left_26px_1.png");
         JButton button8 = new JButton(icon2);
         button8.setBounds(600, 425, 50, 35);
         add(button8);
@@ -385,7 +429,7 @@ public class StudentEmployment extends javax.swing.JPanel{
                 JComboBox departmentList = (JComboBox) event.getSource();
 
                 // Print the selected items and the action command.
-                departmentName = listOfselectedCourses.getSelectedItem();
+                departmentName = departmentList.getSelectedItem();
                 System.out.println("Selected Item list 2 = " + departmentName);
             }
         });

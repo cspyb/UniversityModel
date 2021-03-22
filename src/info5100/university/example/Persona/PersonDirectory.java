@@ -21,9 +21,9 @@ public class PersonDirectory {
 
     }
 
-    public Person newPerson(String id) {
+    public Person newPerson(String id, Double age, String email, String contact, String address, String userName, String pwd) {
 
-        Person p = new Person(id);
+        Person p = new Person(id, age, email, contact, address, userName, pwd);
         personlist.add(p);
         return p;
     }
@@ -38,5 +38,9 @@ public class PersonDirectory {
         }
             return null; //not found after going through the whole list
          }
+
+//    public Person newPerson(String text, String text0, String text1, String text2, String text3) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
     
 }

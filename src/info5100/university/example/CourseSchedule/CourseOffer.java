@@ -19,7 +19,12 @@ public class CourseOffer {
     Course course;
     ArrayList<Seat> seatlist;
     FacultyAssignment facultyassignment;
+    String courseName;
 
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+    
     public CourseOffer(Course c) {
         course = c;
         seatlist = new ArrayList();
@@ -78,6 +83,30 @@ public class CourseOffer {
                 sum = sum + course.getCoursePrice();
             }
 
+        }
+        return sum;
+    }
+    
+    public int getTotalCourseLoss() {
+        int sum = 0;
+        for (Seat s : seatlist) {
+            if (s.isOccupied() == false) {
+                sum = sum + course.getCoursePrice();
+            }
+        }
+        return sum;
+    }
+    
+    public int getTotalSeats() {
+        return seatlist.size();
+    }
+    
+    public int getOccupiedSeats() {
+        int sum = 0;
+        for (Seat s : seatlist) {
+            if (s.isOccupied() == true) {
+                sum += 1;
+            }
         }
         return sum;
     }

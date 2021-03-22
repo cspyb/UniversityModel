@@ -61,6 +61,7 @@ public class CourseLoad {
         for(CourseLoad cl : courseloadlist.values()){
             for(SeatAssignment sa : cl.seatassignments){
                 sumCredits = sumCredits + sa.seat.getCourseCredit();
+                System.out.println("gradepoint>>>"+sa.getGradePoints());
                 sumGradePoints = sumGradePoints + sa.getGradePoints() * sa.seat.getCourseCredit();
             }
         }

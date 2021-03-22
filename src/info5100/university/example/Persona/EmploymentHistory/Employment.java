@@ -20,13 +20,17 @@ public class Employment {
     int weight;
     String quality;
     String job;
+    String type;
+    String startDate;
+    String endDate;
     Employment nextemplyment;  //next job so they are in a sequence 
     
     EmployerProfile employer;
-    public Employment(String j, String employerName){
+    
+    public Employment(String job, String employerName){
         this.job = job;
         employer = new EmployerProfile(employerName);
-        ArrayList relevantcourseoffers = new ArrayList();
+        relevantcourseoffers = new ArrayList();
     }
 
     public ArrayList<Course> getRelevantcourseoffers() {
@@ -41,6 +45,29 @@ public class Employment {
         return employer;
     }
     
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
     
     
 }

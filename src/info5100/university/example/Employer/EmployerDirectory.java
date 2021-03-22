@@ -19,18 +19,47 @@ public class EmployerDirectory {
     Department department;
     ArrayList<EmployerProfile> employerlist;
 
+    public void setEmployerlist(ArrayList<EmployerProfile> employerlist) {
+        this.employerlist = employerlist;
+    }
+    
     public EmployerDirectory(Department d) {
 
         department = d;
         employerlist = new ArrayList();
 
     }
+    
+    public EmployerDirectory() {
+        employerlist = new ArrayList();
+    }
+    
+    
+    
+    public EmployerProfile newEmployer(String n, String l, String contact, int age, int companyAssociation) {
 
+        EmployerProfile sp = new EmployerProfile(n);
+        sp.addEmployerDetails(l, contact, age, companyAssociation);
+        employerlist.add(sp);
+        return sp;
+    }
+    
     public EmployerProfile newEmployerProfile(String n) {
 
         EmployerProfile sp = new EmployerProfile(n);
         employerlist.add(sp);
         return sp;
+    }
+    
+    public Boolean deleteEmployer(String n) {
+        for(int i = 0; i < employerlist.size(); i ++) {
+            Boolean a = employerlist.get(i).getName().matches(n);
+            if (a) {
+                employerlist.remove(employerlist.get(i));
+                return true;
+            }
+        }
+        return false;
     }
 
     public EmployerProfile findTeachingFaculty(String id) {

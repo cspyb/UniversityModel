@@ -24,12 +24,39 @@ import java.util.HashMap;
 public class Department {
 
     String name;
+    String deptHead;
+    String deptDescription;
+    double deptAge;
     CourseCatalog coursecatalog;
     PersonDirectory persondirectory;
     StudentDirectory studentdirectory;
     FacultyDirectory facultydirectory;
-    //EmployerDirectory employerdirectory;
+    DepartmentAccount departmentAccount;
 
+    public String getDeptHead() {
+        return deptHead;
+    }
+
+    public void setDeptHead(String deptHead) {
+        this.deptHead = deptHead;
+    }
+
+    public String getDeptDescription() {
+        return deptDescription;
+    }
+
+    public void setDeptDescription(String deptDescription) {
+        this.deptDescription = deptDescription;
+    }
+
+    public double getDeptAge() {
+        return deptAge;
+    }
+
+    public void setDeptAge(double deptAge) {
+        this.deptAge = deptAge;
+    }
+    
     public FacultyDirectory getFacultydirectory() {
         return facultydirectory;
     }
@@ -46,6 +73,17 @@ public class Department {
         studentdirectory = new StudentDirectory(this); //pass the department object so it stays linked to it
         persondirectory = new PersonDirectory();
         facultydirectory = new FacultyDirectory(this);
+        departmentAccount = new DepartmentAccount(this);
+    }
+    
+    public Department() {
+        
+    }
+    
+    public void newDepartment(String head, String desc, double age) {
+        deptHead = head;
+        deptDescription = desc;
+        deptAge = age;
     }
 
     public PersonDirectory getPersonDirectory() {
@@ -80,18 +118,27 @@ public class Department {
 
     }
 
-    public Course newCourse(String n, String nm, int cr) {
+    public Course newCourse(String n, String nm, int cr, String skill) {
 
-        Course c = coursecatalog.newCourse(n, nm, cr);
+        Course c = coursecatalog.newCourse(n, nm, cr,skill);
         return c;
     }
 
     public int calculateRevenuesBySemester(String semester) {
 
+//        CourseSchedule css = mastercoursecatalog.get(semester);
+
+        return departmentAccount.calculateRevenuesBySemester(semester);
+
+    }
+    
+    public String getPopularCourseBySemester(String semester) {
         CourseSchedule css = mastercoursecatalog.get(semester);
-
-        return css.calculateTotalRevenues();
-
+        return css.getPopularCourse();
+    }
+    
+    public int calculateLossBySemester(String semester) {
+        return departmentAccount.calculateLossBySemester(semester);
     }
 
     public void RegisterForAClass(String studentid, String cn, String semester) {
@@ -107,4 +154,18 @@ public class Department {
         co.assignEmptySeat(cl);
 
     }
+
+    public Course newCourse(String app_eng, String info_5100, int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public HashMap<String, CourseSchedule> getMastercoursecatalog() {
+        return mastercoursecatalog;
+    }
+
+    public void setMastercoursecatalog(HashMap<String, CourseSchedule> mastercoursecatalog) {
+        this.mastercoursecatalog = mastercoursecatalog;
+    }
+    
+    
 }

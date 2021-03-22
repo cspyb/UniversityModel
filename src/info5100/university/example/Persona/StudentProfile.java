@@ -18,14 +18,91 @@ public class StudentProfile {
     Person person;
     Transcript transcript;
     EmploymentHistroy employmenthistory;
-    
+    String username;
+    Double age;
+    String password;
+    String email;
+    String contact;
+    String address;
+    String id;
 
+    public Double getAge() {
+        return age;
+    }
+
+    public void setAge(Double age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    
     public StudentProfile(Person p) {
 
         person = p;
         transcript = new Transcript();
         employmenthistory = new EmploymentHistroy();
+        username = p.userName;
+        password = p.password;
+        age = p.age;
+        address = p.address;
+        email = p.email;
+        contact = p.contact;
+        id = p.getPersonId();
     }
+    
+    
+    
+//    public void updateProfile(Person p) {
+//        p.set
+//    }
 
     public boolean isMatch(String id) {
         if (person.getPersonId().equals(id)) {
@@ -54,8 +131,8 @@ public class StudentProfile {
         return allCourses;
     } 
     
-    public void getGPA(){
-        System.out.println("Student gpa: " + transcript.CalculateGPA());
+    public double getGPA(){
+        return transcript.CalculateGPA();
     }
     
     public String getGrade(){

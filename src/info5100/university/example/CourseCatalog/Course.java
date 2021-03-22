@@ -14,10 +14,23 @@ public class Course {
     String name;
     int credits;
     int price = 1500; //per credit hour
+    String skills;
+    public Course(String n, String numb, int ch,String skills){
+        name = n;
+        number = numb;
+        credits = ch;
+        this.skills = skills;
+    }
+    
     public Course(String n, String numb, int ch){
         name = n;
         number = numb;
         credits = ch;
+//        this.skills = skills;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {
